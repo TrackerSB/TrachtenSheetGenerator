@@ -1,0 +1,19 @@
+plugins {
+    id "application"
+    id "org.openjfx.javafxplugin" version "0.0.8"
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "13"
+    modules = [ "javafx.controls", "javafx.fxml" ]
+}
+
+mainClassName = "$moduleName/de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.Main"
+
+dependencies {
+    testCompile group: "junit", name: "junit", version: "4.12"
+}

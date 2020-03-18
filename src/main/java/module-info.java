@@ -7,4 +7,5 @@ module de.traunviertler_traunwalchen.TrachtenSheetGenerator {
     exports de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui;
 
     opens de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui to javafx.fxml;
+    opens de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.WizardPages to javafx.fxml, bayern.steinbrecher.Wizard;
 }

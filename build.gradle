@@ -15,5 +15,5 @@ javafx {
 mainClassName = "$moduleName/de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.Main"
 
 dependencies {
-    implementation "bayern.steinbrecher:Wizard:1.1"
+    implementation "bayern.steinbrecher:Wizard:1.2"
 }

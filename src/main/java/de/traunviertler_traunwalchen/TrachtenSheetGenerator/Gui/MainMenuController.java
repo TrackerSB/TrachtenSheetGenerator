@@ -2,9 +2,9 @@ package de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui;
 
 import bayern.steinbrecher.wizard.Wizard;
 import bayern.steinbrecher.wizard.WizardPage;
-import de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.WizardPages.AssociationSelector;
+import bayern.steinbrecher.wizard.pages.Selection;
 import de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.WizardPages.FreeFormPage;
-import de.traunviertler_traunwalchen.TrachtenSheetGenerator.Model.Associations;
+import de.traunviertler_traunwalchen.TrachtenSheetGenerator.Model.Association;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -12,8 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,8 +23,12 @@ public class MainMenuController {
     @FXML
     private void startFreeFormWizard() {
         try {
-            WizardPage<Optional<Associations>> associationPage = new AssociationSelector().getWizardPage();
+            WizardPage<Optional<Set<Association>>> associationPage
+                    = new Selection<>(Association.ASSOCIATIONS)
+                    .getWizardPage();
+            associationPage.setNextFunction(() -> "freeFormPage");
             WizardPage<Optional<String>> freeFormPage = new FreeFormPage().getWizardPage();
+            freeFormPage.setFinish(true);
             Stage wizardStage = new Stage();
             new Wizard(Map.of(
                     WizardPage.FIRST_PAGE_KEY, associationPage,

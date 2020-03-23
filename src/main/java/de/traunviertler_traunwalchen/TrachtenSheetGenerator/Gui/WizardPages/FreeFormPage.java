@@ -15,11 +15,6 @@ public class FreeFormPage extends WizardableView<Optional<String>, FreeFormPageC
     }
 
     @Override
-    protected Optional<ResourceBundle> getResourceBundle(){
-        return Optional.empty();
-    }
-
-    @Override
     protected String getWizardFxmlPath() {
         return "FreeFormPage.fxml";
     }

@@ -12,11 +12,6 @@ public class FreeFormPageController extends WizardableController<Optional<String
     private TextArea freeFormContent;
 
     @Override
-    protected Optional<ResourceBundle> getResourceBundle() {
-        return Optional.empty();
-    }
-
-    @Override
     protected Optional<String> calculateResult() {
         return Optional.of(freeFormContent.getText());
     }

@@ -1,4 +1,4 @@
-package de.traunviertler_traunwalchen.TrachtenSheetGenerator.Model;
+package de.traunviertler_traunwalchen.trachtenSheetGenerator.model;
 
 import java.util.Collections;
 import java.util.Set;

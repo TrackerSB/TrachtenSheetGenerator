@@ -1,11 +1,10 @@
-package de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.WizardPages;
+package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.wizardPages;
 
 import bayern.steinbrecher.wizard.WizardableController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 public class FreeFormPageController extends WizardableController<Optional<String>> {
     @FXML

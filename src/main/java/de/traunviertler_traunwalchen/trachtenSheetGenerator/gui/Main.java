@@ -1,4 +1,4 @@
-package de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui;
+package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

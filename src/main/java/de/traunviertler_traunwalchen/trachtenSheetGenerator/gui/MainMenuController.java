@@ -1,10 +1,10 @@
-package de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui;
+package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
 
 import bayern.steinbrecher.wizard.Wizard;
 import bayern.steinbrecher.wizard.WizardPage;
 import bayern.steinbrecher.wizard.pages.Selection;
-import de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.WizardPages.FreeFormPage;
-import de.traunviertler_traunwalchen.TrachtenSheetGenerator.Model.Association;
+import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.wizardPages.FreeFormPage;
+import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.Association;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;

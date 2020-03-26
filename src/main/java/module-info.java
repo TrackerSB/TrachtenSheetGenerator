@@ -4,8 +4,8 @@ module de.traunviertler_traunwalchen.TrachtenSheetGenerator {
     requires java.logging;
     requires bayern.steinbrecher.GenericWizard;
 
-    exports de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui;
+    exports de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
 
-    opens de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui to javafx.fxml;
-    opens de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.WizardPages to javafx.fxml, bayern.steinbrecher.GenericWizard;
+    opens de.traunviertler_traunwalchen.trachtenSheetGenerator.gui to javafx.fxml;
+    opens de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.wizardPages to javafx.fxml, bayern.steinbrecher.GenericWizard;
 }

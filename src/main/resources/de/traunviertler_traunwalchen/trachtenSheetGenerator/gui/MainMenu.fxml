@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.GridPane?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.MainMenuController">
+          fx:controller="de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.MainMenuController">
     <Button text="Freitext"
             onAction="#startFreeFormWizard"/>
 </GridPane>

@@ -1,4 +1,4 @@
-package de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.WizardPages;
+package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.wizardPages;
 
 import bayern.steinbrecher.wizard.WizardableView;
 

@@ -5,6 +5,7 @@ import bayern.steinbrecher.wizard.WizardPage;
 import bayern.steinbrecher.wizard.pages.Selection;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.wizardPages.FreeLetterPage;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.Association;
+import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.LetterData;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -67,7 +68,7 @@ public class WizardGenerator {
                     = new Selection<>(Association.ASSOCIATIONS)
                     .getWizardPage();
             receiversPage.setNextFunction(() -> "letterDataPage");
-            WizardPage<Optional<String>> letterDataPage = new FreeLetterPage().getWizardPage();
+            WizardPage<Optional<LetterData>> letterDataPage = new FreeLetterPage().getWizardPage();
             letterDataPage.setFinish(true);
             return Map.of(
                     WizardPage.FIRST_PAGE_KEY, receiversPage,
@@ -80,7 +81,7 @@ public class WizardGenerator {
                     && wizardResults.containsKey("letterDataPage")) {
                 Optional<Set<Association>> receivers
                         = (Optional<Set<Association>>) wizardResults.get(WizardPage.FIRST_PAGE_KEY);
-                Optional<String> letterData = (Optional<String>) wizardResults.get("letterDataPage");
+                Optional<LetterData> letterData = (Optional<LetterData>) wizardResults.get("letterDataPage");
                 if (receivers.isPresent() && letterData.isPresent()) {
                     return LetterGenerator.from(receivers.get(), letterData.get());
                 } else {

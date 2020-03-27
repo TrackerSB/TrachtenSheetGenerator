@@ -10,7 +10,7 @@ public class FreeFormPage extends WizardableView<Optional<String>, FreeFormPageC
     public FreeFormPage() {
         super("FreeFormPage.fxml",
                 ResourceBundle.getBundle(
-                        "de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.WizardPages.FreeFormPage"));
+                        "de.traunviertler_traunwalchen.TrachtenSheetGenerator.gui.wizardPages.FreeFormPage"));
     }
 
     @Override

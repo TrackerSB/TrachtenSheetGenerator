@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.wizardPages.FreeLetterPageController">
+    <TextField fx:id="subject"
+        promptText="%subject"/>
+    <TextField fx:id="place"/>
+    <TextField fx:id="opening"/>
+    <TextArea fx:id="letterContent"
+        minHeight="100"
+        minWidth="100"/>
+    <TextField fx:id="closing"/>
+</VBox>

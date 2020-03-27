@@ -12,7 +12,7 @@ javafx {
     modules = ["javafx.controls", "javafx.fxml"]
 }
 
-mainClassName = "$moduleName/de.traunviertler_traunwalchen.TrachtenSheetGenerator.Gui.Main"
+mainClassName = "$moduleName/de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.Main"
 
 compileJava.options.encoding = 'UTF-8'
 

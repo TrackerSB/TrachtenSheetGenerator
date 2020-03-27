@@ -5,12 +5,12 @@ import bayern.steinbrecher.wizard.WizardableView;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class FreeFormPage extends WizardableView<Optional<String>, FreeFormPageController> {
+public class FreeLetterPage extends WizardableView<Optional<String>, FreeLetterPageController> {
 
-    public FreeFormPage() {
-        super("FreeFormPage.fxml",
+    public FreeLetterPage() {
+        super("FreeLetterPage.fxml",
                 ResourceBundle.getBundle(
-                        "de.traunviertler_traunwalchen.TrachtenSheetGenerator.gui.wizardPages.FreeFormPage"));
+                        "de.traunviertler_traunwalchen.TrachtenSheetGenerator.gui.wizardPages.FreeLetterPage"));
     }
 
     @Override

@@ -6,9 +6,9 @@ import javafx.scene.control.TextArea;
 
 import java.util.Optional;
 
-public class FreeFormPageController extends WizardableController<Optional<String>> {
+public class FreeLetterPageController extends WizardableController<Optional<String>> {
     @FXML
-    private TextArea freeFormContent;
+    private TextArea letterContent;
 
     @Override
     protected Optional<String> calculateResult() {

@@ -3,7 +3,7 @@ package de.traunviertler_traunwalchen.trachtenSheetGenerator.generators;
 import bayern.steinbrecher.wizard.Wizard;
 import bayern.steinbrecher.wizard.WizardPage;
 import bayern.steinbrecher.wizard.pages.Selection;
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.wizardPages.FreeFormPage;
+import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.wizardPages.FreeLetterPage;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.Association;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -61,28 +61,28 @@ public class WizardGenerator {
                 });
     }
 
-    public static Optional<Map<Association, String>> showFreeFormWizard(Stage owner) {
+    public static Optional<Map<Association, String>> showFreeLetterWizard(Stage owner) {
         ThrowingCallable<Map<String, WizardPage<?>>, IOException> pageGenerator = () -> {
             WizardPage<Optional<Set<Association>>> receiversPage
                     = new Selection<>(Association.ASSOCIATIONS)
                     .getWizardPage();
-            receiversPage.setNextFunction(() -> "letterContentPage");
-            WizardPage<Optional<String>> letterContentPage = new FreeFormPage().getWizardPage();
-            letterContentPage.setFinish(true);
+            receiversPage.setNextFunction(() -> "letterDataPage");
+            WizardPage<Optional<String>> letterDataPage = new FreeLetterPage().getWizardPage();
+            letterDataPage.setFinish(true);
             return Map.of(
                     WizardPage.FIRST_PAGE_KEY, receiversPage,
-                    "letterContentPage", letterContentPage
+                    "letterDataPage", letterDataPage
             );
         };
 
         Function<Map<String, ?>, Map<Association, String>> resultFunction = wizardResults -> {
             if (wizardResults.containsKey(WizardPage.FIRST_PAGE_KEY)
-                    && wizardResults.containsKey("letterContentPage")) {
+                    && wizardResults.containsKey("letterDataPage")) {
                 Optional<Set<Association>> receivers
                         = (Optional<Set<Association>>) wizardResults.get(WizardPage.FIRST_PAGE_KEY);
-                Optional<String> letterContent = (Optional<String>) wizardResults.get("letterContentPage");
-                if (receivers.isPresent() && letterContent.isPresent()) {
-                    return LetterGenerator.from(receivers.get(), letterContent.get());
+                Optional<String> letterData = (Optional<String>) wizardResults.get("letterDataPage");
+                if (receivers.isPresent() && letterData.isPresent()) {
+                    return LetterGenerator.from(receivers.get(), letterData.get());
                 } else {
                     LOGGER.log(Level.SEVERE,
                             "The FreeFormWizard did not yield all required data. No letters are generated.");

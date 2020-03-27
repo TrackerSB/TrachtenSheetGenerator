@@ -12,10 +12,10 @@ public class MainMenuController {
 
     @FXML
     private void startFreeFormWizard() {
-        WizardGenerator.showFreeFormWizard()
+        WizardGenerator.showFreeFormWizard(null) // FIXME Set owning stage
                 .ifPresentOrElse(
                         letters -> LOGGER.log(Level.INFO, "The generated letters are not getting processed yet."),
-                        () -> LOGGER.log(Level.WARNING, "The FreeFormWizard did not yield any letters.")
+                        () -> LOGGER.log(Level.WARNING, "The wizard did not yield any letters.")
                 );
     }
 }

@@ -1,0 +1,10 @@
+.root {
+    -fx-background-color: ghostwhite;
+    -fx-alignment: center;
+    -fx-font-size: 18px;
+}
+
+Button {
+    -fx-content-display: top;
+    -fx-focus-color: forestgreen;
+}

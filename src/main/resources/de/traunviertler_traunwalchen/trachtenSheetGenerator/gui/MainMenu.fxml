@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?language javascript?>
+
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.GridPane?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.MainMenuController">
+          fx:controller="de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.MainMenuController"
+          stylesheets="@MainMenu.css">
     <Button text="%freeLetter"
-            onAction="#startFreeLetterWizard"/>
+            onAction="#startFreeLetterWizard">
+        <graphic>
+            <ImageView fitHeight="100" preserveRatio="true">
+                <Image url="@icons/envelope-4.png"/>
+            </ImageView>
+        </graphic>
+    </Button>
 </GridPane>

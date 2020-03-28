@@ -16,7 +16,7 @@ public class MainMenuController extends ScreenController {
         WizardGenerator.showFreeLetterWizard(null) // FIXME Set owning stage
                 .ifPresentOrElse(
                         letters -> LOGGER.log(Level.INFO, "The generated letters are not getting processed yet."),
-                        () -> LOGGER.log(Level.WARNING, "The wizard did not yield any letters.")
+                        () -> LOGGER.log(Level.INFO, "The wizard did not yield any letters.")
                 );
     }
 }

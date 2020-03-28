@@ -4,8 +4,8 @@ import bayern.steinbrecher.wizard.Wizard;
 import bayern.steinbrecher.wizard.WizardPage;
 import bayern.steinbrecher.wizard.pages.Selection;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.wizardPages.FreeLetterPage;
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.Association;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.LetterData;
+import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.ReceivingAssociation;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -63,10 +63,10 @@ public class WizardGenerator {
                 });
     }
 
-    public static Optional<Map<Association, Path>> showFreeLetterWizard(Stage owner) {
+    public static Optional<Map<ReceivingAssociation, Path>> showFreeLetterWizard(Stage owner) {
         ThrowingCallable<Map<String, WizardPage<?>>, IOException> pageGenerator = () -> {
-            WizardPage<Optional<Set<Association>>> receiversPage
-                    = new Selection<>(Association.ASSOCIATIONS)
+            WizardPage<Optional<Set<ReceivingAssociation>>> receiversPage
+                    = new Selection<>(ReceivingAssociation.RECEIVERS)
                     .getWizardPage();
             receiversPage.setNextFunction(() -> "letterDataPage");
             WizardPage<Optional<LetterData>> letterDataPage = new FreeLetterPage().getWizardPage();
@@ -77,11 +77,11 @@ public class WizardGenerator {
             );
         };
 
-        Function<Map<String, ?>, Map<Association, Path>> resultFunction = wizardResults -> {
+        Function<Map<String, ?>, Map<ReceivingAssociation, Path>> resultFunction = wizardResults -> {
             if (wizardResults.containsKey(WizardPage.FIRST_PAGE_KEY)
                     && wizardResults.containsKey("letterDataPage")) {
-                Optional<Set<Association>> receivers
-                        = (Optional<Set<Association>>) wizardResults.get(WizardPage.FIRST_PAGE_KEY);
+                Optional<Set<ReceivingAssociation>> receivers
+                        = (Optional<Set<ReceivingAssociation>>) wizardResults.get(WizardPage.FIRST_PAGE_KEY);
                 Optional<LetterData> letterData = (Optional<LetterData>) wizardResults.get("letterDataPage");
                 if (receivers.isPresent() && letterData.isPresent()) {
                     return LetterGenerator.from(receivers.get(), letterData.get());

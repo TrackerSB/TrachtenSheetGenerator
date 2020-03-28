@@ -1,7 +1,8 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.generators;
 
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.Association;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.LetterData;
+import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.ReceivingAssociation;
+import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.SendingAssociation;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -18,11 +19,6 @@ import java.util.logging.Logger;
 
 public class LetterGenerator {
     private static final Logger LOGGER = Logger.getLogger(LetterGenerator.class.getName());
-    private static final Association SENDER = Association.ASSOCIATIONS
-            .stream()
-            .filter(a -> a.getName().contains("Traunwalchen"))
-            .findAny()
-            .orElseThrow();
     private static final Configuration TEMPLATE_ENGINE_CONFIGURATION = new Configuration(Configuration.VERSION_2_3_30) {
         {
             try {
@@ -64,13 +60,13 @@ public class LetterGenerator {
         return tempFilePath;
     }
 
-    public static Map<Association, Path> from(Iterable<Association> receivers, LetterData letterData) {
-        Map<Association, Path> generatedLetters = new HashMap<>();
+    public static Map<ReceivingAssociation, Path> from(Iterable<ReceivingAssociation> receivers, LetterData letterData) {
+        Map<ReceivingAssociation, Path> generatedLetters = new HashMap<>();
         receivers.forEach(association -> {
             try {
                 Path tempFilePath = createTempFile();
                 EMPTY_LETTER.process(Map.of(
-                        "sender", SENDER,
+                        "sender", SendingAssociation.TRAUNVIERTLER,
                         "letter", letterData,
                         "receiver", association
                 ), Files.newBufferedWriter(tempFilePath));

@@ -8,23 +8,26 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public abstract class Screen {
+public abstract class Screen<C extends ScreenController> {
 
     private final URL fxmlPath;
     private final ResourceBundle bundle;
-    private /*final*/ ScreenController controller;
 
-    public Screen(URL fxmlPath, ResourceBundle bundle) {
+    public Screen(@NotNull URL fxmlPath, @NotNull ResourceBundle bundle) {
         this.fxmlPath = fxmlPath;
         this.bundle = bundle;
     }
 
     @NotNull
-    public Parent create(Main mainApp) throws IOException {
+    public Parent create(@NotNull Main mainApp) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlPath, bundle);
         Parent root = fxmlLoader.load();
-        controller = fxmlLoader.getController();
+        C controller = fxmlLoader.getController();
         controller.setMainApp(mainApp);
+        afterControllerIsInitialized(controller);
         return root;
+    }
+
+    protected void afterControllerIsInitialized(C controller) {
     }
 }

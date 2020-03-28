@@ -1,5 +1,7 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.model;
 
+import org.jetbrains.annotations.NotNull;
+
 public final class LetterData {
     private String subject;
     private String place;
@@ -7,7 +9,8 @@ public final class LetterData {
     private String content;
     private String closing;
 
-    public LetterData(String subject, String place, String opening, String content, String closing) {
+    public LetterData(@NotNull String subject, @NotNull String place, @NotNull String opening, @NotNull String content,
+                      @NotNull String closing) {
         this.subject = subject;
         this.place = place;
         this.opening = opening;
@@ -15,22 +18,27 @@ public final class LetterData {
         this.closing = closing;
     }
 
+    @NotNull
     public String getSubject() {
         return subject;
     }
 
+    @NotNull
     public String getPlace() {
         return place;
     }
 
+    @NotNull
     public String getOpening() {
         return opening;
     }
 
+    @NotNull
     public String getContent() {
         return content;
     }
 
+    @NotNull
     public String getClosing() {
         return closing;
     }

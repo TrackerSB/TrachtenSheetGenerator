@@ -2,6 +2,7 @@ package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +19,7 @@ public abstract class Screen {
         this.bundle = bundle;
     }
 
+    @NotNull
     public Parent create(Main mainApp) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlPath, bundle);
         Parent root = fxmlLoader.load();

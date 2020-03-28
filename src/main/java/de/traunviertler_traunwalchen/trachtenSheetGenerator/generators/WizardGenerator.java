@@ -10,6 +10,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -65,6 +66,7 @@ public class WizardGenerator {
                 });
     }
 
+    @NotNull
     public Optional<Map<ReceivingAssociation, Path>> showFreeLetterWizard() {
         ThrowingCallable<Map<String, WizardPage<?>>, IOException> pageGenerator = () -> {
             WizardPage<Optional<Set<ReceivingAssociation>>> receiversPage

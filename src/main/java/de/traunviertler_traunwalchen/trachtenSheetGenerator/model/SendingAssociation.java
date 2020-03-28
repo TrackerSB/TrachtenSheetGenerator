@@ -1,5 +1,7 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.model;
 
+import org.jetbrains.annotations.NotNull;
+
 public class SendingAssociation extends Association {
     public static final SendingAssociation TRAUNVIERTLER
             = new SendingAssociation("GTEV \"D'Traunviertler\" Traunwalchen", "Pfarrhofstraße 2", "83374 Traunwalchen",
@@ -7,16 +9,19 @@ public class SendingAssociation extends Association {
     private final String email;
     private final String phone;
 
-    public SendingAssociation(String name, String addressStreet, String addressPlace, String email, String phone) {
+    public SendingAssociation(@NotNull String name, @NotNull String addressStreet, @NotNull String addressPlace,
+                              @NotNull String email, @NotNull String phone) {
         super(name, addressStreet, addressPlace);
         this.email = email;
         this.phone = phone;
     }
 
+    @NotNull
     public String getEmail() {
         return email;
     }
 
+    @NotNull
     public String getPhone() {
         return phone;
     }

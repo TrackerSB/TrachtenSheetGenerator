@@ -7,6 +7,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,7 +61,9 @@ public class LetterGenerator {
         return tempFilePath;
     }
 
-    public static Map<ReceivingAssociation, Path> from(Iterable<ReceivingAssociation> receivers, LetterData letterData) {
+    @NotNull
+    public static Map<ReceivingAssociation, Path> from(
+            Iterable<ReceivingAssociation> receivers, LetterData letterData) {
         Map<ReceivingAssociation, Path> generatedLetters = new HashMap<>();
         receivers.forEach(association -> {
             try {

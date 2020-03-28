@@ -18,14 +18,11 @@ public abstract class Screen {
         this.bundle = bundle;
     }
 
-    public Parent create() throws IOException {
+    public Parent create(Main mainApp) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlPath, bundle);
         Parent root = fxmlLoader.load();
         controller = fxmlLoader.getController();
+        controller.setMainApp(mainApp);
         return root;
-    }
-
-    private void switchTo(Screen next) {
-        // TODO Implement
     }
 }

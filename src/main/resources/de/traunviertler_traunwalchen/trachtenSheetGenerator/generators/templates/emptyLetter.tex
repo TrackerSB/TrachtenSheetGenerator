@@ -1,0 +1,32 @@
+\documentclass[
+    paper=a4,
+    foldmarks=pBT,
+    firstfoot=false
+]{scrlttr2}
+
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+\setkomavar{fromname}{[=sender.name]}
+\setkomavar{fromaddress}{[=receiver.addressStreet]\\[=receiver.addressPlace]}
+\setkomavar{fromemail}{[=sender.email]}
+\setkomavar{fromphone}{[=sender.phone]}
+\setkomavar{subject}{[=letter.subject]}
+\setkomavar{place}{[=letter.place]}
+\setkomavar{date}{\today}
+\KOMAoptions{fromphone=true,fromfax=false,fromemail=true}
+
+\areaset[1cm]{18cm}{24cm}
+
+\begin{document}
+    \begin{letter}{%
+        [=receiver.name]\\
+        [=receiver.addressStreet]\\
+        [=receiver.addressPlace]
+    }
+        \opening{[=letter.opening]}
+        [=letter.content]
+        \closing{[=letter.closing]}
+    \end{letter}
+\end{document}

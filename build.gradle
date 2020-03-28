@@ -22,4 +22,5 @@ tasks.withType(JavaCompile) {
 
 dependencies {
     implementation "bayern.steinbrecher:Wizard:1.16"
+    implementation "org.freemarker:freemarker:2.3.30"
 }

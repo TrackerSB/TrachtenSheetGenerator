@@ -12,6 +12,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -62,7 +63,7 @@ public class WizardGenerator {
                 });
     }
 
-    public static Optional<Map<Association, String>> showFreeLetterWizard(Stage owner) {
+    public static Optional<Map<Association, Path>> showFreeLetterWizard(Stage owner) {
         ThrowingCallable<Map<String, WizardPage<?>>, IOException> pageGenerator = () -> {
             WizardPage<Optional<Set<Association>>> receiversPage
                     = new Selection<>(Association.ASSOCIATIONS)
@@ -76,7 +77,7 @@ public class WizardGenerator {
             );
         };
 
-        Function<Map<String, ?>, Map<Association, String>> resultFunction = wizardResults -> {
+        Function<Map<String, ?>, Map<Association, Path>> resultFunction = wizardResults -> {
             if (wizardResults.containsKey(WizardPage.FIRST_PAGE_KEY)
                     && wizardResults.containsKey("letterDataPage")) {
                 Optional<Set<Association>> receivers

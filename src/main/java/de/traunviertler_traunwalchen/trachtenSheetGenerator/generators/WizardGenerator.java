@@ -23,12 +23,14 @@ import java.util.logging.Logger;
 
 public class WizardGenerator {
     private static final Logger LOGGER = Logger.getLogger(WizardGenerator.class.getName());
+    private final Stage owner;
 
-    private WizardGenerator() {
+    public WizardGenerator(Stage owner) {
+        this.owner = owner;
     }
 
-    private static <R> Optional<R> showWizard(ThrowingCallable<Map<String, WizardPage<?>>, IOException> pageGenerator,
-                                              Function<Map<String, ?>, R> resultFunction, Stage owner) {
+    private <R> Optional<R> showWizard(ThrowingCallable<Map<String, WizardPage<?>>, IOException> pageGenerator,
+                                              Function<Map<String, ?>, R> resultFunction) {
         Supplier<Optional<Map<String, WizardPage<?>>>> safePageGenerator = () -> {
             try {
                 return Optional.of(pageGenerator.call());
@@ -63,7 +65,7 @@ public class WizardGenerator {
                 });
     }
 
-    public static Optional<Map<ReceivingAssociation, Path>> showFreeLetterWizard(Stage owner) {
+    public Optional<Map<ReceivingAssociation, Path>> showFreeLetterWizard() {
         ThrowingCallable<Map<String, WizardPage<?>>, IOException> pageGenerator = () -> {
             WizardPage<Optional<Set<ReceivingAssociation>>> receiversPage
                     = new Selection<>(ReceivingAssociation.RECEIVERS)
@@ -96,7 +98,7 @@ public class WizardGenerator {
             return null;
         };
 
-        return showWizard(pageGenerator, resultFunction, owner);
+        return showWizard(pageGenerator, resultFunction);
     }
 
     @FunctionalInterface

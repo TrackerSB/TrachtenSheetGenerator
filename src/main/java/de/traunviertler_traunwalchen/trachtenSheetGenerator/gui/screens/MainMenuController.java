@@ -13,7 +13,9 @@ public class MainMenuController extends ScreenController {
 
     @FXML
     private void startFreeLetterWizard() {
-        WizardGenerator.showFreeLetterWizard(null) // FIXME Set owning stage
+        getMainApp()
+                .getWizardGenerator()
+                .showFreeLetterWizard()
                 .ifPresentOrElse(
                         letters -> LOGGER.log(Level.INFO, "The generated letters are not getting processed yet."),
                         () -> LOGGER.log(Level.INFO, "The wizard did not yield any letters.")

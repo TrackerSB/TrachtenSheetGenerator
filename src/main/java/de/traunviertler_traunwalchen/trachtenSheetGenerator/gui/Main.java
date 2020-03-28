@@ -1,5 +1,6 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
 
+import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.WizardGenerator;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens.MainMenu;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -14,6 +15,7 @@ public class Main extends Application {
     private Stage primaryStage;
     private Scene primaryScene;
     private final Stack<Screen> screenHistory = new Stack<>();
+    private WizardGenerator wizardGenerator;
 
     @Override
     public void start(Stage stage) throws ScreenSwitchFailedException {
@@ -39,6 +41,17 @@ public class Main extends Application {
             primaryScene.setRoot(nextParent);
         }
         screenHistory.push(nextScreen);
+    }
+
+    public WizardGenerator getWizardGenerator(){
+        if(wizardGenerator == null){
+            if(primaryStage == null){
+                throw new IllegalStateException("start(...) must be called before this method.");
+            } else {
+                wizardGenerator = new WizardGenerator(primaryStage);
+            }
+        }
+        return wizardGenerator;
     }
 
     public static void main(String[] args) {

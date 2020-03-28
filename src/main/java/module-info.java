@@ -5,6 +5,7 @@ module de.traunviertler_traunwalchen.TrachtenSheetGenerator {
     requires bayern.steinbrecher.GenericWizard;
     requires freemarker;
 
+    exports de.traunviertler_traunwalchen.trachtenSheetGenerator.generators;
     exports de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
 
     opens de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens to javafx.fxml;

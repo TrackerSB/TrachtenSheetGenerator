@@ -16,7 +16,6 @@ public class ReceivingAssociation extends Association implements Comparable<Rece
     }
 
     @Override
-    @NotNull
     public int compareTo(ReceivingAssociation other) {
         return getName().compareTo(other.getName());
     }

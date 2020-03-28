@@ -3,11 +3,11 @@ package de.traunviertler_traunwalchen.trachtenSheetGenerator.model;
 import org.jetbrains.annotations.NotNull;
 
 public final class LetterData {
-    private String subject;
-    private String place;
-    private String opening;
-    private String content;
-    private String closing;
+    private final String subject;
+    private final String place;
+    private final String opening;
+    private final String content;
+    private final String closing;
 
     public LetterData(@NotNull String subject, @NotNull String place, @NotNull String opening, @NotNull String content,
                       @NotNull String closing) {

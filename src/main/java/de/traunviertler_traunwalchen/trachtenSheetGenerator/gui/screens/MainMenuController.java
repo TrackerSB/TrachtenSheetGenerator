@@ -1,6 +1,5 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens;
 
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.WizardGenerator;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.ScreenController;
 import javafx.fxml.FXML;
 

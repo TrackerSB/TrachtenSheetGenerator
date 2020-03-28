@@ -8,3 +8,8 @@ Button {
     -fx-content-display: top;
     -fx-focus-color: forestgreen;
 }
+
+GridPane {
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+}

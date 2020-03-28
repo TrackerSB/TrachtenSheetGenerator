@@ -1,12 +1,13 @@
-package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
+package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens;
 
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.WizardGenerator;
+import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.ScreenController;
 import javafx.fxml.FXML;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MainMenuController {
+public class MainMenuController extends ScreenController {
 
     private static final Logger LOGGER = Logger.getLogger(MainMenuController.class.getName());
 

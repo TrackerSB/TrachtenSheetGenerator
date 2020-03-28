@@ -6,13 +6,15 @@
 <?import javafx.scene.layout.GridPane?>
 <GridPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.MainMenuController"
+          fx:controller="de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens.MainMenuController"
           stylesheets="@MainMenu.css">
     <Button text="%freeLetter"
-            onAction="#startFreeLetterWizard">
+            onAction="#startFreeLetterWizard"
+            GridPane.rowIndex="0"
+            GridPane.columnIndex="0">
         <graphic>
             <ImageView fitHeight="100" preserveRatio="true">
-                <Image url="@icons/envelope-4.png"/>
+                <Image url="@../icons/envelope-4.png"/>
             </ImageView>
         </graphic>
     </Button>

@@ -10,8 +10,3 @@
 Button {
     -fx-content-display: top;
 }
-
-GridPane {
-    -fx-hgap: 10;
-    -fx-vgap: 10;
-}

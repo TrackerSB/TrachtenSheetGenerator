@@ -1,5 +1,6 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
 
+import javafx.fxml.FXML;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class ScreenController {
@@ -16,5 +17,10 @@ public abstract class ScreenController {
 
     public void setMainApp(@NotNull Main mainApp) {
         this.mainApp = mainApp;
+    }
+
+    @FXML
+    private void switchBack(){
+        getMainApp().switchBack();
     }
 }

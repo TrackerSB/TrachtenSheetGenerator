@@ -22,6 +22,8 @@ public abstract class Screen<C extends ScreenController> {
     public Parent create(@NotNull Main mainApp) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlPath, bundle);
         Parent root = fxmlLoader.load();
+        root.getStyleClass()
+                .add("screen");
         C controller = fxmlLoader.getController();
         controller.setMainApp(mainApp);
         afterControllerIsInitialized(controller);

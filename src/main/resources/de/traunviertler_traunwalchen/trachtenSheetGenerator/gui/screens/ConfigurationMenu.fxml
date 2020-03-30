@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens.ConfigurationMenuController"
+      stylesheets="@ConfigurationMenu.css">
+    <TextField fx:id="senderName"
+               promptText="%senderName"/>
+    <TextField fx:id="senderAddressStreet"
+               promptText="%senderAddressStreet"/>
+    <TextField fx:id="senderAddressPlace"
+               promptText="%senderAddressPlace"/>
+    <TextField fx:id="senderEmail"
+               promptText="%senderEmail"/>
+    <TextField fx:id="senderPhone"
+               promptText="%senderPhone"/>
+    <Button text="%switchBack"
+            onAction="#saveAndSwitchBack"/>
+</VBox>

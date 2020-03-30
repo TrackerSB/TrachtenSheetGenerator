@@ -18,4 +18,14 @@
             </ImageView>
         </graphic>
     </Button>
+    <Button text="%settings"
+            onAction="#showSettingsDialog"
+            GridPane.rowIndex="0"
+            GridPane.columnIndex="1">
+        <graphic>
+            <ImageView fitHeight="100" preserveRatio="true">
+                <Image url="@../icons/levels.png"/>
+            </ImageView>
+        </graphic>
+    </Button>
 </GridPane>

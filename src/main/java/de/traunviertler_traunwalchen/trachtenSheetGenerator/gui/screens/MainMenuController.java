@@ -1,6 +1,5 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens;
 
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.ScreenController;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.ScreenSwitchFailedException;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.Configuration;
 import javafx.fxml.FXML;
@@ -14,7 +13,7 @@ public class MainMenuController extends ScreenController {
 
     @FXML
     private void startFreeLetterWizard() {
-        getMainApp()
+        getScreenManager()
                 .getWizardGenerator()
                 .showFreeLetterWizard()
                 .ifPresentOrElse(
@@ -26,7 +25,7 @@ public class MainMenuController extends ScreenController {
     @FXML
     private void showSettingsDialog() {
         try {
-            getMainApp().switchTo(new ConfigurationMenu(Configuration.getInstance()));
+            getScreenManager().switchTo(new ConfigurationMenu(Configuration.getInstance()));
         } catch (ScreenSwitchFailedException ex) {
             LOGGER.log(Level.WARNING, "Could not switch to configuration menu", ex);
         }

@@ -1,4 +1,4 @@
-package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
+package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,13 +19,13 @@ public abstract class Screen<C extends ScreenController> {
     }
 
     @NotNull
-    public Parent create(@NotNull Main mainApp) throws IOException {
+    public Parent create(@NotNull ScreenManager manager) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlPath, bundle);
         Parent root = fxmlLoader.load();
         root.getStyleClass()
                 .add("screen");
         C controller = fxmlLoader.getController();
-        controller.setMainApp(mainApp);
+        controller.setScreenManager(manager);
         afterControllerIsInitialized(controller);
         return root;
     }

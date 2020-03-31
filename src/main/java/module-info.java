@@ -7,7 +7,6 @@ module de.traunviertler_traunwalchen.TrachtenSheetGenerator {
     requires freemarker;
     requires org.jetbrains.annotations;
 
-    exports de.traunviertler_traunwalchen.trachtenSheetGenerator.generators;
     exports de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
 
     opens de.traunviertler_traunwalchen.trachtenSheetGenerator.gui to javafx.fxml;

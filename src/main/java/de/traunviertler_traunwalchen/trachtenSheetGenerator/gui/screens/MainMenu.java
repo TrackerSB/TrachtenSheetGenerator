@@ -1,7 +1,5 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens;
 
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.Screen;
-
 import java.util.ResourceBundle;
 
 public class MainMenu extends Screen<MainMenuController> {

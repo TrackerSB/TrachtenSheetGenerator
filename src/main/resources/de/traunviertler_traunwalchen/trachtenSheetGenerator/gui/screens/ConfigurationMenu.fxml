@@ -1,22 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.VBox?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens.ConfigurationMenuController"
       stylesheets="@ConfigurationMenu.css">
-    <TextField fx:id="senderName"
-               promptText="%senderName"/>
-    <TextField fx:id="senderAddressStreet"
-               promptText="%senderAddressStreet"/>
-    <TextField fx:id="senderAddressPlace"
-               promptText="%senderAddressPlace"/>
-    <TextField fx:id="senderEmail"
-               promptText="%senderEmail"/>
-    <TextField fx:id="senderPhone"
-               promptText="%senderPhone"/>
-    <Button text="%switchBack"
-            onAction="#saveAndSwitchBack"/>
+    <TitledPane text="%sender">
+        <GridPane>
+            <Label text="%name"
+                   GridPane.rowIndex="0"
+                   GridPane.columnIndex="0"
+                   GridPane.halignment="RIGHT"/>
+            <TextField fx:id="senderName"
+                       promptText="%name"
+                       GridPane.rowIndex="0"
+                       GridPane.columnIndex="1"/>
+            <Label text="%addressStreet"
+                   GridPane.rowIndex="1"
+                   GridPane.columnIndex="0"
+                   GridPane.halignment="RIGHT"/>
+            <TextField fx:id="senderAddressStreet"
+                       promptText="%addressStreet"
+                       GridPane.rowIndex="1"
+                       GridPane.columnIndex="1"/>
+            <Label text="%addressPlace"
+                   GridPane.rowIndex="2"
+                   GridPane.columnIndex="0"
+                   GridPane.halignment="RIGHT"/>
+            <TextField fx:id="senderAddressPlace"
+                       promptText="%addressPlace"
+                       GridPane.rowIndex="2"
+                       GridPane.columnIndex="1"/>
+            <Label text="%email"
+                   GridPane.rowIndex="3"
+                   GridPane.columnIndex="0"
+                   GridPane.halignment="RIGHT"/>
+            <TextField fx:id="senderEmail"
+                       promptText="%email"
+                       GridPane.rowIndex="3"
+                       GridPane.columnIndex="1"/>
+            <Label text="%phone"
+                   GridPane.rowIndex="4"
+                   GridPane.columnIndex="0"
+                   GridPane.halignment="RIGHT"/>
+            <TextField fx:id="senderPhone"
+                       promptText="%phone"
+                       GridPane.rowIndex="4"
+                       GridPane.columnIndex="1"/>
+            <Button text="%switchBack"
+                    onAction="#saveAndSwitchBack"
+                    GridPane.rowIndex="5"
+                    GridPane.columnIndex="1"
+                    GridPane.halignment="RIGHT"/>
+        </GridPane>
+    </TitledPane>
 </VBox>

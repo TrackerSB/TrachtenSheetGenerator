@@ -3,3 +3,7 @@
 VBox {
     -fx-fill-width: false;
 }
+
+TitledPane {
+    -fx-collapsible: false;
+}

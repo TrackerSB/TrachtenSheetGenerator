@@ -48,26 +48,13 @@ public class LetterGenerator {
     private LetterGenerator() {
     }
 
-    private static Path createTempFile() throws IOException {
-        Path tempFilePath = Files.createTempFile("TrachtenSheetGenerator", ".tex");
-        Runtime.getRuntime()
-                .addShutdownHook(new Thread(() -> {
-                    try {
-                        Files.delete(tempFilePath);
-                    } catch (IOException ex) {
-                        LOGGER.log(Level.INFO, "Could not delete temporary file", ex);
-                    }
-                }));
-        return tempFilePath;
-    }
-
     @NotNull
     public static Map<ReceivingAssociation, Path> from(
             Iterable<ReceivingAssociation> receivers, LetterData letterData) {
         Map<ReceivingAssociation, Path> generatedLetters = new HashMap<>();
         receivers.forEach(association -> {
             try {
-                Path tempFilePath = createTempFile();
+                Path tempFilePath = TempFileUtility.createTempFile();
                 EMPTY_LETTER.process(Map.of(
                         "sender", SendingAssociation.TRAUNVIERTLER,
                         "letter", letterData,

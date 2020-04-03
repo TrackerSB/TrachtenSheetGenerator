@@ -52,15 +52,15 @@ public class LetterGenerator {
     public static Map<ReceivingAssociation, Path> from(
             Iterable<ReceivingAssociation> receivers, LetterData letterData) {
         Map<ReceivingAssociation, Path> generatedLetters = new HashMap<>();
-        receivers.forEach(association -> {
+        receivers.forEach(receiver -> {
             try {
                 Path tempFilePath = TempFileGenerator.createTempFile(".tex");
                 EMPTY_LETTER.process(Map.of(
                         "sender", SendingAssociation.TRAUNVIERTLER,
                         "letter", letterData,
-                        "receiver", association
+                        "receiver", receiver
                 ), Files.newBufferedWriter(tempFilePath));
-                generatedLetters.put(association, tempFilePath);
+                generatedLetters.put(receiver, tempFilePath);
             } catch (TemplateException | IOException ex) {
                 LOGGER.log(Level.WARNING, "Could not generate template", ex);
             }

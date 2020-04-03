@@ -54,7 +54,7 @@ public class LetterGenerator {
         Map<ReceivingAssociation, Path> generatedLetters = new HashMap<>();
         receivers.forEach(association -> {
             try {
-                Path tempFilePath = TempFileUtility.createTempFile();
+                Path tempFilePath = TempFileGenerator.createTempFile(".tex");
                 EMPTY_LETTER.process(Map.of(
                         "sender", SendingAssociation.TRAUNVIERTLER,
                         "letter", letterData,

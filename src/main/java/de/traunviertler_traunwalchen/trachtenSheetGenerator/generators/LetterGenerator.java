@@ -28,6 +28,7 @@ public class LetterGenerator {
                 LOGGER.log(Level.SEVERE, "Generation configuration failed", ex);
             }
             setDefaultEncoding("UTF-8");
+            setOutputFormat(TexOutputFormat.INSTANCE);
             setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
             setLogTemplateExceptions(false);
             setWrapUncheckedExceptions(true);

@@ -10,6 +10,7 @@ import javafx.util.Pair;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,16 +23,23 @@ public class MainMenuController extends ScreenController {
         getScreenManager()
                 .getWizardGenerator()
                 .showFreeLetterWizard()
-                .ifPresent(
+                .map(
                         letters -> letters.values()
-                                .forEach(inputPath -> {
+                                .stream()
+                                .map(inputPath -> {
                                     try {
-                                        PDFGenerator.compile(inputPath);
+                                        return PDFGenerator.compile(inputPath);
                                     } catch (PDFGenerationFailedException ex) {
                                         LOGGER.log(Level.WARNING, null, ex);
+                                        return null;
                                     }
                                 })
-                );
+                                .filter(Objects::nonNull)
+                )
+                .ifPresent(outputPaths -> {
+                    System.out.println("Generated PDF files:");
+                    outputPaths.forEach(path -> System.out.println(path.normalize().toString()));
+                });
     }
 
     @FXML

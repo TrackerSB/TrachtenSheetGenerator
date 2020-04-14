@@ -11,7 +11,12 @@ public final class PDFGenerator {
     private PDFGenerator() {
     }
 
-    public static void compile(@NotNull Path texInputPath)
+    /**
+     * Generates a PDF from a TEX file. The PDF as well as all temporary files which the generation process yields
+     * are placed right next to the input file and have the same name apart from the input files file extension.
+     * TODO Delete all temporary files except the actual PDF.
+     */
+    public static Path compile(@NotNull Path texInputPath)
             throws PDFGenerationFailedException {
         if (!Files.isRegularFile(texInputPath)) {
             throw new IllegalArgumentException("The input path must be a file");
@@ -28,6 +33,7 @@ public final class PDFGenerator {
                     = String.format("-nobibtex -pdf -jobname=\"%s\" \"%s\"", jobname, texInputPath.toString());
             try {
                 SystemCommandUtility.execute("latexmk", compileCommandParams, null);
+                return Path.of(jobname + ".pdf"); // NOTE This relies on the naming as done by latexmk
             } catch (SystemCommandFailedException ex) {
                 throw new PDFGenerationFailedException(
                         String.format("Could not compile \"%s\"", texInputPath.toString()), ex);

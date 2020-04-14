@@ -24,22 +24,9 @@ public class MainMenuController extends ScreenController {
                 .showFreeLetterWizard()
                 .ifPresent(
                         letters -> letters.values()
-                                .stream()
-                                .map(texInputPath -> {
-                                    Path pdfOutputPath;
+                                .forEach(inputPath -> {
                                     try {
-                                        pdfOutputPath = TempFileGenerator.createTempDir();
-                                    } catch (IOException ex) {
-                                        LOGGER.log(Level.WARNING,
-                                                "Could not create PDF output file for " + texInputPath);
-                                        pdfOutputPath = null;
-                                    }
-                                    return new Pair<>(texInputPath, pdfOutputPath);
-                                })
-                                .filter(inOutPaths -> inOutPaths.getValue() != null)
-                                .forEach(inOutPaths -> {
-                                    try {
-                                        PDFGenerator.compile(inOutPaths.getKey(), inOutPaths.getValue());
+                                        PDFGenerator.compile(inputPath);
                                     } catch (PDFGenerationFailedException ex) {
                                         LOGGER.log(Level.WARNING, null, ex);
                                     }

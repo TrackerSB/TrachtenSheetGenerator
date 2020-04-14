@@ -11,22 +11,26 @@ public final class PDFGenerator {
     private PDFGenerator() {
     }
 
-    public static void compile(@NotNull Path texInputPath, @NotNull Path pdfOutputDir)
+    public static void compile(@NotNull Path texInputPath)
             throws PDFGenerationFailedException {
-        if (!Files.isDirectory(pdfOutputDir)) {
-            throw new IllegalArgumentException("The output path must be a directory");
-        }
         if (!Files.isRegularFile(texInputPath)) {
             throw new IllegalArgumentException("The input path must be a file");
         }
 
         if (SystemCommandUtility.isCommandAvailable("latexmk")) {
-            String compileCommandParams = "-nobibtex -pdf -jobname=\"" + pdfOutputDir.normalize().toString()
-                    + "/Test\" " + texInputPath.toString();
+            String jobname = texInputPath.normalize().toString();
+            int fileExtensionSeparationIndex = jobname.lastIndexOf('.');
+            if (fileExtensionSeparationIndex > -1) { // Strip file extension if existent
+                jobname = jobname.substring(0, fileExtensionSeparationIndex);
+            }
+
+            String compileCommandParams
+                    = String.format("-nobibtex -pdf -jobname=\"%s\" \"%s\"", jobname, texInputPath.toString());
             try {
                 SystemCommandUtility.execute("latexmk", compileCommandParams, null);
             } catch (SystemCommandFailedException ex) {
-                throw new PDFGenerationFailedException("Could not compile \"" + texInputPath.toString() + "\"", ex);
+                throw new PDFGenerationFailedException(
+                        String.format("Could not compile \"%s\"", texInputPath.toString()), ex);
             }
         } else {
             throw new PDFGenerationFailedException("Latexmk is not found");

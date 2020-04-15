@@ -29,13 +29,12 @@ public class ConfigurationMenuController extends ScreenController {
         senderPhone.setText(configuration.getSenderPhone());
     }
 
-    @FXML
-    private void saveAndSwitchBack(){
+    protected void switchBack() {
         configuration.setSenderName(senderName.getText());
         configuration.setSenderAddressStreet(senderAddressStreet.getText());
         configuration.setSenderAddressPlace(senderAddressPlace.getText());
         configuration.setSenderEmail(senderEmail.getText());
         configuration.setSenderPhone(senderPhone.getText());
-        getScreenManager().switchBack();
+        super.switchBack();
     }
 }

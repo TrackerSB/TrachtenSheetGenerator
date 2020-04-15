@@ -9,7 +9,7 @@
           fx:controller="de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens.MainMenuController"
           stylesheets="@MainMenu.css">
     <Button text="%freeLetter"
-            onAction="#startFreeLetterWizard"
+            onAction="#startFreeLetterProcess"
             GridPane.rowIndex="0"
             GridPane.columnIndex="0">
         <graphic>
@@ -19,7 +19,7 @@
         </graphic>
     </Button>
     <Button text="%settings"
-            onAction="#showSettingsDialog"
+            onAction="#showConfigurationDialog"
             GridPane.rowIndex="0"
             GridPane.columnIndex="1">
         <graphic>

@@ -43,9 +43,10 @@ public class MainMenuController extends ScreenController {
     }
 
     @FXML
-    private void showSettingsDialog() {
+    private void showConfigurationDialog() {
         try {
-            getScreenManager().switchTo(new ConfigurationMenu(Configuration.getInstance()));
+            getScreenManager()
+                    .switchTo(new ConfigurationMenu(Configuration.getInstance()));
         } catch (ScreenSwitchFailedException ex) {
             LOGGER.log(Level.WARNING, "Could not switch to configuration menu", ex);
         }

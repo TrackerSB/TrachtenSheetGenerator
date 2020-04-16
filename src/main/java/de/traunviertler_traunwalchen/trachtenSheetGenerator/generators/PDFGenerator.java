@@ -29,8 +29,8 @@ public final class PDFGenerator {
                 jobname = jobname.substring(0, fileExtensionSeparationIndex);
             }
 
-            String compileCommandParams
-                    = String.format("-nobibtex -pdf -jobname=\"%s\" \"%s\"", jobname, texInputPath.toString());
+            String compileCommandParams = String.format(
+                    "-nobibtex -norc -pdf -jobname=\"%s\" \"%s\"", jobname, texInputPath.toString());
             try {
                 SystemCommandUtility.execute("latexmk", compileCommandParams, null);
                 return Path.of(jobname + ".pdf"); // NOTE This relies on the naming as done by latexmk

@@ -1,6 +1,6 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens;
 
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.PDFGenerationFailedException;
+import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.GenerationFailedException;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.PDFGenerator;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.TempFileGenerator;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.ScreenSwitchFailedException;
@@ -29,7 +29,7 @@ public class MainMenuController extends ScreenController {
                                 .map(inputPath -> {
                                     try {
                                         return PDFGenerator.compile(inputPath);
-                                    } catch (PDFGenerationFailedException ex) {
+                                    } catch (GenerationFailedException ex) {
                                         LOGGER.log(Level.WARNING, null, ex);
                                         return null;
                                     }

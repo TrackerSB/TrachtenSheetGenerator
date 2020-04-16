@@ -17,7 +17,7 @@ public final class PDFGenerator {
      * TODO Delete all temporary files except the actual PDF.
      */
     public static Path compile(@NotNull Path texInputPath)
-            throws PDFGenerationFailedException {
+            throws GenerationFailedException {
         if (!Files.isRegularFile(texInputPath)) {
             throw new IllegalArgumentException("The input path must be a file");
         }
@@ -35,11 +35,11 @@ public final class PDFGenerator {
                 SystemCommandUtility.execute("latexmk", compileCommandParams, null);
                 return Path.of(jobname + ".pdf"); // NOTE This relies on the naming as done by latexmk
             } catch (SystemCommandFailedException ex) {
-                throw new PDFGenerationFailedException(
+                throw new GenerationFailedException(
                         String.format("Could not compile \"%s\"", texInputPath.toString()), ex);
             }
         } else {
-            throw new PDFGenerationFailedException("Latexmk is not found");
+            throw new GenerationFailedException("Latexmk is not found");
         }
     }
 }

@@ -1,6 +1,7 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens;
 
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.Configuration;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ResourceBundle;
 
@@ -15,7 +16,7 @@ public class ConfigurationMenu extends Screen<ConfigurationMenuController> {
     }
 
     @Override
-    protected void afterControllerIsInitialized(ConfigurationMenuController controller) {
+    protected void afterControllerIsInitialized(@NotNull ConfigurationMenuController controller) {
         super.afterControllerIsInitialized(controller);
         controller.setConfiguration(initialConfiguration);
     }

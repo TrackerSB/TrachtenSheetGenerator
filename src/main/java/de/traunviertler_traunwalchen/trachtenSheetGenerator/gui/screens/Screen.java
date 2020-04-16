@@ -30,6 +30,6 @@ public abstract class Screen<C extends ScreenController> {
         return root;
     }
 
-    protected void afterControllerIsInitialized(C controller) {
+    protected void afterControllerIsInitialized(@NotNull C controller) {
     }
 }

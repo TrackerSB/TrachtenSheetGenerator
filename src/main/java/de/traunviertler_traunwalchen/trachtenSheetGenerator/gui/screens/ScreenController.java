@@ -21,7 +21,7 @@ public abstract class ScreenController {
     }
 
     @FXML
-    protected void switchBack(){
+    protected void switchToPreviousScreen(){
         getScreenManager().switchBack();
     }
 }

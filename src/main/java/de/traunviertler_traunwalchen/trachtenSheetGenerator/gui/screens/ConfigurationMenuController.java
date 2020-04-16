@@ -29,12 +29,12 @@ public class ConfigurationMenuController extends ScreenController {
         senderPhone.setText(configuration.getSenderPhone());
     }
 
-    protected void switchBack() {
+    protected void switchToPreviousScreen() {
         configuration.setSenderName(senderName.getText());
         configuration.setSenderAddressStreet(senderAddressStreet.getText());
         configuration.setSenderAddressPlace(senderAddressPlace.getText());
         configuration.setSenderEmail(senderEmail.getText());
         configuration.setSenderPhone(senderPhone.getText());
-        super.switchBack();
+        super.switchToPreviousScreen();
     }
 }

@@ -12,7 +12,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,25 +74,57 @@ public final class SystemCommandUtility {
     /////////////////////////
     // Windows OS specific //
     /////////////////////////
-    private static <T> PowerShellResponse executePowerShellScript(
+    private static PowerShellResponse executePowerShellScript(
             @NotNull String script, @NotNull String params) throws SystemCommandFailedException {
         assert SystemUtils.IS_OS_WINDOWS : "Tried to execute PowerShell command on non-Windows OS";
-        try (PowerShell powerShell = PowerShell.openSession();
-                BufferedReader scriptReader = new BufferedReader(new InputStreamReader(
-                        SystemCommandUtility.class.getResourceAsStream(script)))) {
-            return powerShell.executeScript(scriptReader, params);
-        } catch (PowerShellNotAvailableException | IOException ex) {
-            throw new SystemCommandFailedException(ex);
+        try (BufferedReader scriptReader = new BufferedReader(new InputStreamReader(
+                SystemCommandUtility.class.getResourceAsStream(script)))) {
+            return PowerShellSessionProvider.runWithSession(ps -> ps.executeScript(scriptReader, params));
+        } catch (InterruptedException ex) {
+            throw new SystemCommandFailedException("Could not open Powershell", ex);
+        } catch (IOException ex) {
+            throw new SystemCommandFailedException("Could not execute script", ex);
         }
     }
 
     private static PowerShellResponse executePowerShellCommand(@NotNull String command)
             throws SystemCommandFailedException {
         assert SystemUtils.IS_OS_WINDOWS : "Tried to execute PowerShell command on non-Windows OS";
-        try (PowerShell powerShell = PowerShell.openSession()) {
-            return powerShell.executeCommand(command);
-        } catch (PowerShellNotAvailableException ex) {
-            throw new SystemCommandFailedException(ex);
+        try {
+            return PowerShellSessionProvider.runWithSession(ps -> ps.executeCommand(command));
+        } catch (InterruptedException ex) {
+            throw new SystemCommandFailedException("Could not open Powershell", ex);
+        }
+    }
+
+    private static class PowerShellSessionProvider {
+        private static final int MAX_NUMBER_POWERSHELL_SESSIONS = 4;
+        private static final BlockingDeque<PowerShell> availablePowerShellSessions
+                = new LinkedBlockingDeque<>(MAX_NUMBER_POWERSHELL_SESSIONS) {
+            {
+                if (SystemUtils.IS_OS_WINDOWS) {
+                    try {
+                        for (int i = 0; i < MAX_NUMBER_POWERSHELL_SESSIONS; i++) {
+                            push(PowerShell.openSession());
+                        }
+                    } catch (PowerShellNotAvailableException ex) {
+                        throw new ExceptionInInitializerError(ex);
+                    }
+                    // FIXME Close all the sessions
+                }
+            }
+        };
+
+        private PowerShellSessionProvider() {
+        }
+
+        public static <T> T runWithSession(@NotNull Function<PowerShell, T> consumer) throws InterruptedException {
+            assert SystemUtils.IS_OS_WINDOWS : "PowerShell is Windows-only";
+            // FIXME Introduce timeout for taking
+            PowerShell powerShell = availablePowerShellSessions.take();
+            T result = consumer.apply(powerShell);
+            availablePowerShellSessions.push(powerShell);
+            return result;
         }
     }
 }

@@ -7,7 +7,6 @@ module de.traunviertler_traunwalchen.TrachtenSheetGenerator {
     requires freemarker;
     requires org.jetbrains.annotations;
     requires org.apache.commons.lang3;
-    requires jPowerShell;
 
     exports de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
 

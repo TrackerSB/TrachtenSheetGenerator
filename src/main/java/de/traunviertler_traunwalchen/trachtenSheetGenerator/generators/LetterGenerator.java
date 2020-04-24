@@ -25,7 +25,7 @@ public class LetterGenerator {
             try {
                 setDirectoryForTemplateLoading(new File(LetterGenerator.class.getResource("templates").getFile()));
             } catch (IOException ex) {
-                LOGGER.log(Level.SEVERE, "Generation configuration failed", ex);
+                throw new ExceptionInInitializerError(ex);
             }
             setDefaultEncoding("UTF-8");
             setOutputFormat(TexOutputFormat.INSTANCE);

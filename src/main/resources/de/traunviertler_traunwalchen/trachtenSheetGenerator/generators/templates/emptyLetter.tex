@@ -21,13 +21,17 @@
 \areaset[1cm]{18cm}{24cm}
 
 \begin{document}
-    \begin{letter}{%
-        [=receiver.name]\\
-        [=receiver.addressStreet]\\
-        [=receiver.addressPlace]
-    }
-        \opening{[=letter.opening]}
-        [=letter.content]
-        \closing{[=letter.closing]}
-    \end{letter}
+    [#list receivers as r]
+        [#if r??]
+            \begin{letter}{%
+                [=r.name!'Missing']\\
+                [=r.addressStreet]\\
+                [=r.addressPlace]
+            }
+                \opening{[=letter.opening]}
+                [=letter.content]
+                \closing{[=letter.closing]}
+            \end{letter}
+        [/#if]
+    [/#list]
 \end{document}

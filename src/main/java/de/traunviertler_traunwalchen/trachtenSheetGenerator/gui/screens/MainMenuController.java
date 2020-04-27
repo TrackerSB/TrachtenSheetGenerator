@@ -2,15 +2,11 @@ package de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens;
 
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.GenerationFailedException;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.PDFGenerator;
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.TempFileGenerator;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.ScreenSwitchFailedException;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.model.Configuration;
 import javafx.fxml.FXML;
-import javafx.util.Pair;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Objects;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,22 +15,18 @@ public class MainMenuController extends ScreenController {
     private static final Logger LOGGER = Logger.getLogger(MainMenuController.class.getName());
 
     @FXML
-    private void startFreeLetterWizard() {
+    private void startFreeLetterProcess() {
         getScreenManager()
                 .getWizardGenerator()
                 .showFreeLetterWizard()
-                .map(
-                        letters -> letters.values()
-                                .stream()
-                                .map(inputPath -> {
-                                    try {
-                                        return PDFGenerator.compile(inputPath);
-                                    } catch (GenerationFailedException ex) {
-                                        LOGGER.log(Level.WARNING, null, ex);
-                                        return null;
-                                    }
-                                })
-                                .filter(Objects::nonNull)
+                .map(letterPath -> {
+                            try {
+                                return PDFGenerator.compile(letterPath);
+                            } catch (GenerationFailedException ex) {
+                                LOGGER.log(Level.WARNING, null, ex);
+                                return null;
+                            }
+                        }
                 )
                 .ifPresent(outputPaths -> {
                     System.out.println("Generated PDF files:");

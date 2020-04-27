@@ -13,13 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class LetterGenerator {
-    private static final Logger LOGGER = Logger.getLogger(LetterGenerator.class.getName());
     private static final Configuration TEMPLATE_ENGINE_CONFIGURATION = new Configuration(Configuration.VERSION_2_3_30) {
         {
             try {
@@ -33,6 +29,7 @@ public class LetterGenerator {
             setLogTemplateExceptions(false);
             setWrapUncheckedExceptions(true);
             setFallbackOnNullLoopVariable(false);
+            setTagSyntax(Configuration.SQUARE_BRACKET_TAG_SYNTAX);
             setInterpolationSyntax(Configuration.SQUARE_BRACKET_INTERPOLATION_SYNTAX);
         }
     };
@@ -50,22 +47,18 @@ public class LetterGenerator {
     }
 
     @NotNull
-    public static Map<ReceivingAssociation, Path> from(
-            Iterable<ReceivingAssociation> receivers, LetterData letterData) {
-        Map<ReceivingAssociation, Path> generatedLetters = new HashMap<>();
-        receivers.forEach(receiver -> {
-            try {
-                Path tempFilePath = TempFileGenerator.createTempFile(".tex");
-                EMPTY_LETTER.process(Map.of(
-                        "sender", SendingAssociation.TRAUNVIERTLER,
-                        "letter", letterData,
-                        "receiver", receiver
-                ), Files.newBufferedWriter(tempFilePath));
-                generatedLetters.put(receiver, tempFilePath);
-            } catch (TemplateException | IOException ex) {
-                LOGGER.log(Level.WARNING, "Could not generate template", ex);
-            }
-        });
-        return generatedLetters;
+    public static Path from(@NotNull Iterable<ReceivingAssociation> receivers, @NotNull LetterData letterData)
+            throws GenerationFailedException {
+        try {
+            Path tempFilePath = TempFileGenerator.createTempFile(".tex");
+            EMPTY_LETTER.process(Map.of(
+                    "sender", SendingAssociation.TRAUNVIERTLER,
+                    "letter", letterData,
+                    "receivers", receivers
+            ), Files.newBufferedWriter(tempFilePath));
+            return tempFilePath;
+        } catch (TemplateException | IOException ex) {
+            throw new GenerationFailedException("Could not generate template", ex);
+        }
     }
 }

@@ -31,7 +31,7 @@ public class WizardGenerator {
     }
 
     private <R> Optional<R> showWizard(ThrowingCallable<Map<String, WizardPage<?>>, IOException> pageGenerator,
-                                              Function<Map<String, ?>, R> resultFunction) {
+                                       Function<Map<String, ?>, R> resultFunction) {
         Supplier<Optional<Map<String, WizardPage<?>>>> safePageGenerator = () -> {
             try {
                 return Optional.of(pageGenerator.call());
@@ -67,7 +67,7 @@ public class WizardGenerator {
     }
 
     @NotNull
-    public Optional<Map<ReceivingAssociation, Path>> showFreeLetterWizard() {
+    public Optional<Path> showFreeLetterWizard() {
         ThrowingCallable<Map<String, WizardPage<?>>, IOException> pageGenerator = () -> {
             WizardPage<Optional<Set<ReceivingAssociation>>> receiversPage
                     = new Selection<>(ReceivingAssociation.RECEIVERS)
@@ -81,23 +81,31 @@ public class WizardGenerator {
             );
         };
 
-        Function<Map<String, ?>, Map<ReceivingAssociation, Path>> resultFunction = wizardResults -> {
+        Function<Map<String, ?>, Path> resultFunction = wizardResults -> {
+            Path generatedTexFilePath;
             if (wizardResults.containsKey(WizardPage.FIRST_PAGE_KEY)
                     && wizardResults.containsKey("letterDataPage")) {
                 Optional<Set<ReceivingAssociation>> receivers
                         = (Optional<Set<ReceivingAssociation>>) wizardResults.get(WizardPage.FIRST_PAGE_KEY);
                 Optional<LetterData> letterData = (Optional<LetterData>) wizardResults.get("letterDataPage");
                 if (receivers.isPresent() && letterData.isPresent()) {
-                    return LetterGenerator.from(receivers.get(), letterData.get());
+                    try {
+                        generatedTexFilePath = LetterGenerator.from(receivers.get(), letterData.get());
+                    } catch (GenerationFailedException ex) {
+                        LOGGER.log(Level.SEVERE, "The generation of TEX files failed", ex);
+                        generatedTexFilePath = null;
+                    }
                 } else {
-                    LOGGER.log(Level.SEVERE,
+                    LOGGER.log(Level.WARNING,
                             "The FreeFormWizard did not yield all required data. No letters are generated.");
+                    generatedTexFilePath = null;
                 }
             } else {
-                LOGGER.log(Level.SEVERE,
+                LOGGER.log(Level.WARNING,
                         "The FreeFormWizard did not show all required pages. No letters are generated");
+                generatedTexFilePath = null;
             }
-            return null;
+            return generatedTexFilePath;
         };
 
         return showWizard(pageGenerator, resultFunction);

@@ -10,6 +10,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws ScreenSwitchFailedException {
+        stage.maximizedProperty()
+                .addListener((obs, oldVal, newVal) -> {
+                    if(newVal){
+                        stage.setFullScreen(true);
+                    }
+                });
+        stage.fullScreenProperty()
+                .addListener((obs, oldVal, newVal) -> {
+                    if(!newVal){
+                        stage.setMaximized(false);
+                    }
+                });
         stage.setFullScreen(true);
         stage.getIcons().addAll(new Image(getClass().getResourceAsStream("icons/logo.png")));
         ScreenManager screenManager = new ScreenManager(stage);

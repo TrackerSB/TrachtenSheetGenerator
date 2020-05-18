@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public abstract class Screen<C extends ScreenController> {
@@ -20,6 +21,7 @@ public abstract class Screen<C extends ScreenController> {
 
     @NotNull
     public Parent create(@NotNull ScreenManager manager) throws IOException {
+        Objects.requireNonNull(fxmlPath, "The FXML path is null. Maybe the resource was not found.");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlPath, bundle);
         Parent root = fxmlLoader.load();
         root.getStyleClass()

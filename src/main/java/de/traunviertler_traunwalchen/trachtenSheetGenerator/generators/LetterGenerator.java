@@ -50,7 +50,7 @@ public class LetterGenerator {
     public static Path from(@NotNull Iterable<ReceivingAssociation> receivers, @NotNull LetterData letterData)
             throws GenerationFailedException {
         try {
-            Path tempFilePath = TempFileGenerator.createTempFile(".tex");
+            Path tempFilePath = TempFileGenerator.createTempFile(TempFileGenerator.createTempDir(), ".tex");
             EMPTY_LETTER.process(Map.of(
                     "sender", SendingAssociation.TRAUNVIERTLER,
                     "letter", letterData,

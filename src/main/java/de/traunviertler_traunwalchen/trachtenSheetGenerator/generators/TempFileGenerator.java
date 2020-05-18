@@ -1,6 +1,5 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.generators;
 
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.utility.SystemCommandUtility;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,12 +32,15 @@ public final class TempFileGenerator {
      * NOTE The returned path is guaranteed to be allowed for tex files.
      */
     @NotNull
-    public static Path createTempFile(@Nullable String suffix) throws IOException {
-        Path tempFile = Files.createTempFile(DEFAULT_PREFIX, suffix);
+    public static Path createTempFile(@Nullable Path dir, @Nullable String suffix) throws IOException {
+        Path tempFile = (dir == null) ? Files.createTempFile(DEFAULT_PREFIX, suffix)
+                : Files.createTempFile(dir, DEFAULT_PREFIX, suffix);
         attachAutomaticDeletion(tempFile);
-        String texCompatiblePath = SystemCommandUtility.resolvePath(tempFile)
-                .orElseThrow(() -> new IOException("Could not resolve TEX compatible path"));
-        return Paths.get(texCompatiblePath);
+        // FIXME Return TEX compatible file
+        // String texCompatiblePath = SystemCommandUtility.resolvePath(tempFile)
+        //         .orElseThrow(() -> new IOException("Could not resolve TEX compatible path"));
+        // return Paths.get(texCompatiblePath);
+        return tempFile;
     }
 
     @NotNull

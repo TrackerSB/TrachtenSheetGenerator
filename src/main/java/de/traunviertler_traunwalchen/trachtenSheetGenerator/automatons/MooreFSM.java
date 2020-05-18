@@ -1,4 +1,4 @@
-package de.traunviertler_traunwalchen.trachtenSheetGenerator.utility;
+package de.traunviertler_traunwalchen.trachtenSheetGenerator.automatons;
 
 import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
  * Represents a Moore final state machine. It accepts a {@link String} that represents the movement through the FSM
  * and outputs the state in which the {@link String} ends as well as the generated output.
  */
-public class MooreFSM<S extends Enum<S> & FSMState> {
+public class MooreFSM<S extends Enum<S> & FSMState<S>> {
     private final S startState;
 
     public MooreFSM(@NotNull S startState) {
@@ -19,7 +19,7 @@ public class MooreFSM<S extends Enum<S> & FSMState> {
         S currentState = startState;
         StringBuilder output = new StringBuilder();
         for (char c : input.toCharArray()){
-            Pair<S, Character> processResult = currentState.process(c);
+            Pair<S, String> processResult = currentState.process(c);
             currentState = processResult.getKey();
             output.append(processResult.getValue());
         }

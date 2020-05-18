@@ -1,13 +1,13 @@
 module de.traunviertler_traunwalchen.TrachtenSheetGenerator {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.web;
     requires java.logging;
     requires java.prefs;
     requires bayern.steinbrecher.GenericWizard;
     requires bayern.steinbrecher.DialogUtility;
     requires freemarker;
     requires org.jetbrains.annotations;
-    requires org.apache.commons.lang3;
 
     exports de.traunviertler_traunwalchen.trachtenSheetGenerator.gui;
 

@@ -1,0 +1,25 @@
+digraph escapeCommand {
+    rankdir=LR;
+    size="8,5";
+
+    node[shape=point]; toOutside;
+    node[shape=doublecircle, label="OutsideArg / <copy>"]; outside;
+    node[shape=circle, label="InsideArg / <copy>"]; inside;
+    node[shape=circle, label="EscapeStart / &epsilon;"]; escapeBegin;
+    node[shape=circle, label="EscapeBackslash / \\\\\\\\"]; escapeBackslash;
+    node[shape=circle, label="EscapeQuotes / \\\\\\\""]; escapeDoubleQuote;
+    node[shape=circle, label="ConvertPath / /<copy>"]; convertPath;
+
+    toOutside -> outside;
+    outside -> outside [label="*"];
+    outside -> inside [label="\""];
+    inside -> outside [label="\""];
+    inside -> inside [label="*"];
+    inside -> escapeBegin [label="\\"];
+    escapeBegin -> escapeBackslash [label="\\"];
+    escapeBackslash -> inside [label="&epsilon;"];
+    escapeBegin -> escapeDoubleQuote [label="\""];
+    escapeDoubleQuote -> inside [label="&epsilon;"];
+    escapeBegin -> convertPath [label="*"];
+    convertPath -> inside [label="&epsilon;"];
+}

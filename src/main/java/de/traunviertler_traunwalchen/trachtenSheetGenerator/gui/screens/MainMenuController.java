@@ -28,9 +28,13 @@ public class MainMenuController extends ScreenController {
                             }
                         }
                 )
-                .ifPresent(outputPaths -> {
-                    System.out.println("Generated PDF files:");
-                    outputPaths.forEach(path -> System.out.println(path.normalize().toString()));
+                .ifPresent(outputPath -> {
+                    try {
+                        getScreenManager()
+                                .switchTo(new PDFGallery(List.of(outputPath)));
+                    } catch (ScreenSwitchFailedException ex) {
+                        LOGGER.log(Level.WARNING, "Could not load preview for generated PDF files.", ex);
+                    }
                 });
     }
 

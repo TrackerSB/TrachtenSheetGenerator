@@ -9,7 +9,7 @@ repositories {
 
 javafx {
     version = "13"
-    modules = ["javafx.controls", "javafx.fxml"]
+    modules = ["javafx.controls", "javafx.fxml", "javafx.web"]
 }
 
 mainClassName = "$moduleName/de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.Main"
@@ -25,5 +25,4 @@ dependencies {
     implementation "bayern.steinbrecher:Wizard:1.16"
     implementation "org.freemarker:freemarker:2.3.30"
     implementation "org.jetbrains:annotations:19.0.0"
-    implementation "org.apache.commons:commons-lang3:3.10"
 }

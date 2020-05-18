@@ -1,0 +1,21 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens.PDFGalleryController"
+      stylesheets="@PDFGallery.css">
+    <HBox VBox.vgrow="ALWAYS">
+        <Button text="prev"
+                onAction="#switchToPreviousSlide"
+                disable="${controller.onFirstSlide}"/>
+        <StackPane fx:id="pdfSlideStack"/>
+        <Button text="next"
+                onAction="#switchToNextSlide"
+                disable="${controller.onLastSlide}"/>
+    </HBox>
+    <Button text="%done"
+            onAction="#switchToPreviousScreen"
+            VBox.vgrow="NEVER"/>
+</VBox>

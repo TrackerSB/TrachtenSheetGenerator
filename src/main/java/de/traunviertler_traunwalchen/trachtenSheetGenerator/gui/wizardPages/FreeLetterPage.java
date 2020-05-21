@@ -11,7 +11,7 @@ public class FreeLetterPage extends WizardableView<Optional<LetterData>, FreeLet
     public FreeLetterPage() {
         super("FreeLetterPage.fxml",
                 ResourceBundle.getBundle(
-                        "de.traunviertler_traunwalchen.TrachtenSheetGenerator.gui.wizardPages.FreeLetterPage"));
+                        "de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.wizardPages.FreeLetterPage"));
     }
 
     @Override

@@ -4,6 +4,7 @@ module de.traunviertler_traunwalchen.TrachtenSheetGenerator {
     requires java.logging;
     requires java.prefs;
     requires bayern.steinbrecher.GenericWizard;
+    requires bayern.steinbrecher.DialogUtility;
     requires freemarker;
     requires org.jetbrains.annotations;
     requires org.apache.commons.lang3;

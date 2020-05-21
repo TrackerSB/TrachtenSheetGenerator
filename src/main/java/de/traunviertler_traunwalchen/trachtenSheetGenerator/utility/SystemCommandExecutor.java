@@ -1,6 +1,5 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.utility;
 
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.automatons.FSMState;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.TempFileGenerator;
 import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;

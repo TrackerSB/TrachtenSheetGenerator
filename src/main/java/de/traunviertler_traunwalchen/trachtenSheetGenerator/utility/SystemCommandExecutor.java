@@ -1,7 +1,6 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.utility;
 
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.generators.TempFileGenerator;
-import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -9,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -21,6 +21,16 @@ public final class SystemCommandExecutor {
 
     private static String wrapSystemCommand(String command) {
         return String.format("stdout_result = check_output(\"%s\")", command);
+    }
+
+    @Nullable
+    public static String resolveSystemPath(@NotNull String path) throws SystemCommandFailedException {
+        Objects.requireNonNull(path);
+        Iterable<String> commands = List.of(
+                "from os.path import realpath",
+                String.format("print(realpath(\"%s\"))", path)
+        );
+        return executePythonScript(commands, Function.identity(), (stdout, stderr) -> "not found", () -> "not found");
     }
 
     @Nullable
@@ -87,6 +97,10 @@ public final class SystemCommandExecutor {
             this.process = process;
         }
 
+        public boolean waitFor() throws InterruptedException {
+            return process.waitFor(COMMAND_TIMEOUT_VALUE, COMMAND_TIMEOUT_UNIT);
+        }
+
         /**
          * Add a level of escaping within quoted arguments of the command
          */
@@ -94,10 +108,6 @@ public final class SystemCommandExecutor {
             return command.replaceAll("\\\\(?!\")", "/") // Replace \ in paths with /
                     .replaceAll("\\\\", "\\\\\\\\") // Replace \ with \\
                     .replaceAll("\"", "\\\\\""); // Replace " with \\"
-        }
-
-        public boolean waitFor() throws InterruptedException {
-            return process.waitFor(COMMAND_TIMEOUT_VALUE, COMMAND_TIMEOUT_UNIT);
         }
 
         public void runCommand(String command) throws SystemCommandFailedException {

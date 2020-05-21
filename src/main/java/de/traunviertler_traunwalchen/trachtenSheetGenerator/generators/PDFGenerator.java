@@ -1,17 +1,13 @@
 package de.traunviertler_traunwalchen.trachtenSheetGenerator.generators;
 
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.utility.Convenience;
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.utility.SystemCommandFailedException;
 import de.traunviertler_traunwalchen.trachtenSheetGenerator.utility.SystemCommandExecutor;
-import de.traunviertler_traunwalchen.trachtenSheetGenerator.utility.ResourceUtility;
+import de.traunviertler_traunwalchen.trachtenSheetGenerator.utility.SystemCommandFailedException;
 import javafx.util.Pair;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
-import java.util.function.Supplier;
 
 public final class PDFGenerator {
 
@@ -37,8 +33,14 @@ public final class PDFGenerator {
                 return filename;
             }
         });
+        String resolvedTexInputPath;
+        try {
+            resolvedTexInputPath = SystemCommandExecutor.resolveSystemPath(texInputPath.toString());
+        } catch (SystemCommandFailedException ex) {
+            throw new GenerationFailedException("Could not convert the input path to a latexmk compatible path", ex);
+        }
         String compileCommand = String.format(
-                "latexmk -nobibtex -norc -pdf -jobname='%s' '%s'", jobname, texInputPath.toString());
+                "latexmk -nobibtex -norc -pdf -jobname='%s' '%s'", jobname, resolvedTexInputPath);
         Path workingDir = texInputPath.getParent();
         Pair<Boolean, String> result;
         try {

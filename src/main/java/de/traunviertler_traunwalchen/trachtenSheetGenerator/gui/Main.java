@@ -5,11 +5,20 @@ import de.traunviertler_traunwalchen.trachtenSheetGenerator.gui.screens.ScreenMa
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Main extends Application {
+    private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
     @Override
-    public void start(Stage stage) throws ScreenSwitchFailedException {
+    public void start(@NotNull Stage stage) throws ScreenSwitchFailedException {
+        Thread.setDefaultUncaughtExceptionHandler((thread, throwable) -> {
+            LOGGER.log(Level.SEVERE, "Encountered uncaught exception on " + thread, throwable);
+            // FIXME Show exception dialog
+        });
         stage.maximizedProperty()
                 .addListener((obs, oldVal, newVal) -> {
                     if(newVal){

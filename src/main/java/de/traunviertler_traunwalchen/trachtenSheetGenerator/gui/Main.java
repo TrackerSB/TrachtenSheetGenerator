@@ -21,13 +21,13 @@ public class Main extends Application {
         });
         stage.maximizedProperty()
                 .addListener((obs, oldVal, newVal) -> {
-                    if(newVal){
+                    if (newVal) {
                         stage.setFullScreen(true);
                     }
                 });
         stage.fullScreenProperty()
                 .addListener((obs, oldVal, newVal) -> {
-                    if(!newVal){
+                    if (!newVal) {
                         stage.setMaximized(false);
                     }
                 });

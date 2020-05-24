@@ -15,13 +15,13 @@ public abstract class Screen<C extends ScreenController> {
     private final ResourceBundle bundle;
 
     public Screen(@NotNull URL fxmlPath, @NotNull ResourceBundle bundle) {
+        Objects.requireNonNull(fxmlPath, "The FXML path is null. Maybe the resource was not found.");
         this.fxmlPath = fxmlPath;
         this.bundle = bundle;
     }
 
     @NotNull
     public Parent create(@NotNull ScreenManager manager) throws IOException {
-        Objects.requireNonNull(fxmlPath, "The FXML path is null. Maybe the resource was not found.");
         FXMLLoader fxmlLoader = new FXMLLoader(fxmlPath, bundle);
         Parent root = fxmlLoader.load();
         root.getStyleClass()

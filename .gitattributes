@@ -1,4 +1,5 @@
 * text eol=lf
 *.pdf binary
+*.png binary
 LICENSE binary
 LICENCE binary
